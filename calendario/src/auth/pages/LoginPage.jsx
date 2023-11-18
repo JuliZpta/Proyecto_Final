@@ -19,12 +19,10 @@ export const LoginPage = () => {
   const handleLoginSubmit = (e) => {
     e.preventDefault();
 
-    // Simula el inicio de sesión directo sin validaciones
+
     login({ email: loginEmail });
 
-    // O simplemente navegar a la página del calendario si hay un usuario simulado
     if (user) {
-      // Reemplaza '/calendar' con la ruta correcta a tu página de calendario
       window.location.href = '/calendar';
     }
   };

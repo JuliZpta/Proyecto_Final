@@ -149,7 +149,8 @@ export const CalendarModal = () => {
             onChange={onInputChange}
           />
           <small id="emailHelp" className="form-text text-muted">
-            Una descripción corta
+             
+             Descripción 
           </small>
         </div>
 
