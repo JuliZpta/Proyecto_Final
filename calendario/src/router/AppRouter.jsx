@@ -6,45 +6,36 @@ import { useEffect } from "react"
 
 import { LoadingPage } from "../shared"
 
-
-
-
-
 export const AppRouter = () => {
+  const { status, checkAuthToken } = useAuthStore();
 
-  const { status, checkAuthToken} = useAuthStore()
+  useEffect(() => {
+    checkAuthToken();
+  }, []);
 
-  console.log('env', process.env.NODE_ENV)
-
-    useEffect(() => {
-      checkAuthToken()
-    }, [])
-
-    if (status === 'checking') {
-        return <LoadingPage/>
-    }
-    
+  if (status === 'checking') {
+    return <LoadingPage />;
+  }
 
   return (
     <Routes>
-
-        {
-            (status === 'not-authenticated')
-            ? (
-              <>
-                <Route path="auth/*" element={<LoginPage/>}/>
-                <Route path="/*" element={<Navigate to={'/auth/login'}/>}/>
-
-              </>
-            )
-            : (
-              <>
-                <Route path="/" element={<CalendarPage/>}/>
-                <Route path="/*" element={<Navigate to="/" />}/>
-              </>
-            )
+      <Route
+        path="/*"
+        element={
+          status === 'not-authenticated' ? (
+            <Navigate to={'/auth/login'} />
+          ) : (
+            <Navigate to={'/'} />
+          )
         }
-
+      />
+      <Route
+        path="/auth/*"
+        element={
+          status === 'not-authenticated' ? <LoginPage /> : <Navigate to={'/'} />
+        }
+      />
+      <Route path="/" element={<CalendarPage />} />
     </Routes>
-  )
-}
+  );
+};

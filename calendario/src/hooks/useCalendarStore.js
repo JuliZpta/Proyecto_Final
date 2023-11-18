@@ -26,7 +26,7 @@ export const useCalendarStore = () => {
 
     try {
       if (calendarEvent.id) {
-        // If user has an ID is because the event needs to be updated
+        
         await calendarApi.put(`/events/${calendarEvent.id}`, calendarEvent);
         dispatch(onUpdateEvent({ ...calendarEvent }));
         return;

@@ -1,27 +1,18 @@
-import React from 'react'
-import { useAuthStore, useCalendarStore } from '../../hooks'
+import React from 'react';
+import { useAuthStore } from '../../hooks';
 
 export const Navbar = () => {
+  const { user } = useAuthStore();
 
-  const {startLogout, user} = useAuthStore()
+  // Verificar si user está definido antes de intentar acceder a la propiedad 'name'
+  const userName = user ? user.name : 'Usuario';
 
-  const handleLogout = () => {
-    startLogout()
-  }
   return (
-    <div className='navbar navbar-dark bg-dark mb-4 px-4'>
-        <span className='navbar-brand capitalize'>
-            <i className='fas fa-calendar-alt'></i>
-            &nbsp;
-            &nbsp;
-            {user.name}
-        </span>
-
-        <button onClick={handleLogout} className='btn btn-outline-danger'>
-            <i className='fa fa-sign-out-alt'></i>
-            &nbsp;
-            <span>Salir</span>
-        </button>
-    </div>
-  )
-}
+    <nav>
+      <div>
+        <p>Bienvenido, {userName}</p>
+      </div>
+      {/* Otro contenido del Navbar */}
+    </nav>
+  );
+};
